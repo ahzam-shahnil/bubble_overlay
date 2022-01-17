@@ -157,6 +157,18 @@ class BubbleOverlayService : Service() {
                             }
                             MotionEvent.ACTION_UP -> {
                                 //if (lastAction == MotionEvent.ACTION_DOWN) { }
+                                 // Difference between initial coordinate and current coordinate
+                        val x_diff = initialTouchX - initialX
+                        val y_diff = initialTouchY - initialY
+
+                        // check if action move is little as move happen on view with just a tap
+                        if (Math.abs(x_diff) < 5 && Math.abs(y_diff) < 5) {
+                            time_end = System.currentTimeMillis()
+                            // only perform click if time is less than 200ms
+                            if (time_end - time_start < 200) {
+                                onFloatingWidgetClick()
+                            }
+                        }
                                 lastAction = event.action
                                 return true
                             }
@@ -176,7 +188,18 @@ class BubbleOverlayService : Service() {
                 }
         )
     }
+  
+    private fun onFloatingWidgetClick() {
+        _continueToSnap = false
+        // bring the application to front
+        val it = Intent("intent.bring.app.to.foreground")
+        it.setComponent(ComponentName(getPackageName(), getApplicationContext().getPackageName().toString() + ".MainActivity"))
+        it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        getApplicationContext().startActivity(it)
 
+        // stop the service
+        stopSelf()
+    }
     override fun onDestroy() {
         mWakeLock?.release()
         stopForeground(true)
