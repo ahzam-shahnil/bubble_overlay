@@ -125,8 +125,12 @@ class BubbleOverlayService : Service() {
 
         //Set the close button.
         val closeButton = mBubbleView?.findViewById<View>(R.id.bubble_close)
+        val imgView = mBubbleView?.findViewById<View>(R.id.bubble_image_top)
         closeButton?.setOnClickListener { //
             stopSelf()
+        }
+        imgView?.setOnClickListener { //
+            onFloatingWidgetClick()
         }
 
         val card = mBubbleView?.findViewById<CardView>(R.id.card)
