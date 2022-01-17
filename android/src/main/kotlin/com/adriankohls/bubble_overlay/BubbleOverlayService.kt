@@ -130,11 +130,7 @@ class BubbleOverlayService : Service() {
         }
 
         val card = mBubbleView?.findViewById<CardView>(R.id.card)
-        card?.setOnClickListener {
-            startActivity(
-                    FlutterActivity.createDefaultIntent(this)
-            )
-        }
+     
         card?.setOnTouchListener(
                 object : OnTouchListener {
                     var time_start: Long = 0
@@ -169,6 +165,7 @@ class BubbleOverlayService : Service() {
                                     time_end = System.currentTimeMillis()
                                     // only perform click if time is less than 200ms
                                     if (time_end - time_start < 200) {
+                                         Log.d("Controls","Action up")
                                         onFloatingWidgetClick()
                                     }
                                 }
