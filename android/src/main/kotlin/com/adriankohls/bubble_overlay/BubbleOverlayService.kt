@@ -136,6 +136,8 @@ class BubbleOverlayService : Service() {
         }
         card?.setOnTouchListener(
                 object : OnTouchListener {
+                    var time_start: Long = 0
+            var time_end: Long = 0
                     private var lastAction = 0
                     private var initialX = 0
                     private var initialY = 0
@@ -144,7 +146,7 @@ class BubbleOverlayService : Service() {
                     override fun onTouch(v: View, event: MotionEvent): Boolean {
                         when (event.action) {
                             MotionEvent.ACTION_DOWN -> {
-
+ time_start = System.currentTimeMillis()
                                 //remember the initial position.
                                 initialX = params.x
                                 initialY = params.y
