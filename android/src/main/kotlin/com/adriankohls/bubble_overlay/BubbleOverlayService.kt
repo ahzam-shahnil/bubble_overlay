@@ -2,6 +2,7 @@ package com.adriankohls.bubble_overlay
 
 import android.annotation.SuppressLint
 import android.app.Service
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -137,7 +138,7 @@ class BubbleOverlayService : Service() {
         card?.setOnTouchListener(
                 object : OnTouchListener {
                     var time_start: Long = 0
-            var time_end: Long = 0
+                    var time_end: Long = 0
                     private var lastAction = 0
                     private var initialX = 0
                     private var initialY = 0
@@ -146,7 +147,7 @@ class BubbleOverlayService : Service() {
                     override fun onTouch(v: View, event: MotionEvent): Boolean {
                         when (event.action) {
                             MotionEvent.ACTION_DOWN -> {
- time_start = System.currentTimeMillis()
+                                time_start = System.currentTimeMillis()
                                 //remember the initial position.
                                 initialX = params.x
                                 initialY = params.y
@@ -159,18 +160,18 @@ class BubbleOverlayService : Service() {
                             }
                             MotionEvent.ACTION_UP -> {
                                 //if (lastAction == MotionEvent.ACTION_DOWN) { }
-                                 // Difference between initial coordinate and current coordinate
-                        val x_diff = initialTouchX - initialX
-                        val y_diff = initialTouchY - initialY
+                                // Difference between initial coordinate and current coordinate
+                                val x_diff = initialTouchX - initialX
+                                val y_diff = initialTouchY - initialY
 
-                        // check if action move is little as move happen on view with just a tap
-                        if (Math.abs(x_diff) < 5 && Math.abs(y_diff) < 5) {
-                            time_end = System.currentTimeMillis()
-                            // only perform click if time is less than 200ms
-                            if (time_end - time_start < 200) {
-                                onFloatingWidgetClick()
-                            }
-                        }
+                                // check if action move is little as move happen on view with just a tap
+                                if (Math.abs(x_diff) < 5 && Math.abs(y_diff) < 5) {
+                                    time_end = System.currentTimeMillis()
+                                    // only perform click if time is less than 200ms
+                                    if (time_end - time_start < 200) {
+                                        onFloatingWidgetClick()
+                                    }
+                                }
                                 lastAction = event.action
                                 return true
                             }
@@ -190,9 +191,9 @@ class BubbleOverlayService : Service() {
                 }
         )
     }
-  
+
     private fun onFloatingWidgetClick() {
-        _continueToSnap = false
+
         // bring the application to front
         val it = Intent("intent.bring.app.to.foreground")
         it.setComponent(ComponentName(getPackageName(), getApplicationContext().getPackageName().toString() + ".MainActivity"))
@@ -202,6 +203,7 @@ class BubbleOverlayService : Service() {
         // stop the service
         stopSelf()
     }
+
     override fun onDestroy() {
         mWakeLock?.release()
         stopForeground(true)
