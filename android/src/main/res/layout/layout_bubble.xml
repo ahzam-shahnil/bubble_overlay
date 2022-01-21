@@ -17,10 +17,12 @@
         >
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
+        app:cardBackgroundColor="#E26A2C"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerInParent="true"
         android:layout_margin="16dp"
+
         android:foregroundGravity="center"
         app:cardCornerRadius="100dp"
         app:cardElevation="8dp">
@@ -39,7 +41,7 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@android:drawable/sym_def_app_icon"
-            android:contentDescription="TODO" />
+            tools:ignore="ContentDescription" />
 <!--        <TextView-->
 <!--            android:id="@+id/bubble_custom_text_top"-->
 <!--            android:layout_width="match_parent"-->
