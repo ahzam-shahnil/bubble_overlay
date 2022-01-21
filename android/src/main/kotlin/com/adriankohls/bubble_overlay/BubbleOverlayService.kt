@@ -32,7 +32,7 @@ class BubbleOverlayService : Service() {
     }
 
     fun updateText(customText: String) {
-        val textView = mBubbleView?.findViewById<TextView>(R.id.bubble_custom_text)
+        val textView = mBubbleView?.findViewById<TextView>(R.id.bubble_custom_text_top)
         textView?.text = customText
     }
 
@@ -123,7 +123,7 @@ class BubbleOverlayService : Service() {
         mWindowManager?.addView(mBubbleView, params)
 
         //Set the close button.
-        val textView = mBubbleView?.findViewById<View>(R.id.bubble_custom_text)
+        val textView = mBubbleView?.findViewById<View>(R.id.bubble_custom_text_top)
 //        val imgView = mBubbleView?.findViewById<View>(R.id.bubble_image_top)
         textView?.setOnClickListener { //
             onFloatingWidgetClick()
