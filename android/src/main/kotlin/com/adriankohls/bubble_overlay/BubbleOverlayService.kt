@@ -16,7 +16,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
-import io.flutter.embedding.android.FlutterActivity;
 
 
 class BubbleOverlayService : Service() {
@@ -124,14 +123,14 @@ class BubbleOverlayService : Service() {
         mWindowManager?.addView(mBubbleView, params)
 
         //Set the close button.
-        val closeButton = mBubbleView?.findViewById<View>(R.id.bubble_close)
-        val imgView = mBubbleView?.findViewById<View>(R.id.bubble_image_top)
-        closeButton?.setOnClickListener { //
-            stopSelf()
-        }
-        imgView?.setOnClickListener { //
+        val textView = mBubbleView?.findViewById<View>(R.id.bubble_custom_text)
+//        val imgView = mBubbleView?.findViewById<View>(R.id.bubble_image_top)
+        textView?.setOnClickListener { //
             onFloatingWidgetClick()
         }
+//        imgView?.setOnClickListener { //
+//            onFloatingWidgetClick()
+//        }
 
         val card = mBubbleView?.findViewById<CardView>(R.id.card)
      
@@ -161,18 +160,18 @@ class BubbleOverlayService : Service() {
                             MotionEvent.ACTION_UP -> {
                                 //if (lastAction == MotionEvent.ACTION_DOWN) { }
                                 // Difference between initial coordinate and current coordinate
-                                val x_diff = initialTouchX - initialX
-                                val y_diff = initialTouchY - initialY
-
-                                // check if action move is little as move happen on view with just a tap
-                                if (Math.abs(x_diff) < 5 && Math.abs(y_diff) < 5) {
-                                    time_end = System.currentTimeMillis()
-                                    // only perform click if time is less than 200ms
-                                    if (time_end - time_start < 200) {
-                                         Log.d("Controls","Action up")
-                                        onFloatingWidgetClick()
-                                    }
-                                }
+//                                val x_diff = initialTouchX - initialX
+//                                val y_diff = initialTouchY - initialY
+//
+//                                // check if action move is little as move happen on view with just a tap
+//                                if (kotlin.math.abs(x_diff) < 5 && kotlin.math.abs(y_diff) < 5) {
+//                                    time_end = System.currentTimeMillis()
+//                                    // only perform click if time is less than 200ms
+//                                    if (time_end - time_start < 200) {
+//                                         Log.d("Controls","Action up")
+//                                        onFloatingWidgetClick()
+//                                    }
+//                                }
                                 lastAction = event.action
                                 return true
                             }
@@ -197,9 +196,9 @@ class BubbleOverlayService : Service() {
 
         // bring the application to front
         val it = Intent("intent.bring.app.to.foreground")
-        it.setComponent(ComponentName(getPackageName(), getApplicationContext().getPackageName().toString() + ".MainActivity"))
-        it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        getApplicationContext().startActivity(it)
+        it.component = ComponentName(packageName, applicationContext.packageName.toString() + ".MainActivity")
+        it.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        applicationContext.startActivity(it)
 
         // stop the service
         stopSelf()
