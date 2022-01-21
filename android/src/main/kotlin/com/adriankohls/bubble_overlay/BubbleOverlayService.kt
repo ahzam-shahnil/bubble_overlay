@@ -32,7 +32,7 @@ class BubbleOverlayService : Service() {
     }
 
     fun updateText(customText: String) {
-        val textView = mBubbleView?.findViewById<TextView>(R.id.bubble_custom_text_top)
+        val textView = mBubbleView?.findViewById<TextView>(R.id.bubble_custom_text)
         textView?.text = customText
     }
 
@@ -57,7 +57,7 @@ class BubbleOverlayService : Service() {
     }
 
     fun updateTextColor(color: String) {
-        val textView = mBubbleView?.findViewById<TextView>(R.id.bubble_custom_text_top)
+        val textView = mBubbleView?.findViewById<TextView>(R.id.bubble_custom_text)
         textView?.setTextColor(Color.parseColor(color))
     }
 
