@@ -83,7 +83,7 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/textview_design"
+        android:background="@drawable/button_background"
         android:elevation="16dp"
         android:gravity="center_vertical|center_horizontal"
         android:text="3"

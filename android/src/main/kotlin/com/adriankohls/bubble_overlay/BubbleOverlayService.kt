@@ -122,19 +122,19 @@ class BubbleOverlayService : Service() {
         mWindowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
         mWindowManager?.addView(mBubbleView, params)
 
-        //Set the close button.
-        val textView = mBubbleView?.findViewById<View>(R.id.bubble_custom_text_top)
+        //Set the on back to app button.
+        val card_circle = mBubbleView?.findViewById<CardView>(R.id.card)
 //        val imgView = mBubbleView?.findViewById<View>(R.id.bubble_image_top)
-        textView?.setOnClickListener { //
+        card_circle?.setOnClickListener { //
             onFloatingWidgetClick()
         }
 //        imgView?.setOnClickListener { //
 //            onFloatingWidgetClick()
 //        }
 
-        val card = mBubbleView?.findViewById<CardView>(R.id.card)
+        val text_view_circle = mBubbleView?.findViewById<View>(R.id.bubble_custom_text_top)
      
-        card?.setOnTouchListener(
+        text_view_circle?.setOnTouchListener(
                 object : OnTouchListener {
                     var time_start: Long = 0
                     var time_end: Long = 0
