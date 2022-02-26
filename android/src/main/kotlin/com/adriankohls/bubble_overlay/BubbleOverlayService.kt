@@ -43,7 +43,7 @@ class BubbleOverlayService : Service() {
 
     fun updateTitleColor(color: String) {
         val textView = mBubbleView?.findViewById<TextView>(R.id.bubble_custom_text_top)
-        textView?.setTextColor(Color.parseColor(color))
+        textView?.setBackgroundColor(Color.parseColor(color))
     }
 
     fun updateBottomText(customText: String) {

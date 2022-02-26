@@ -202,7 +202,7 @@ class BubbleOverlayPlugin : ActivityAware, FlutterPlugin, MethodChannel.MethodCa
                 throw Exception("BubbleService not running.")
             "updateBubbleTitleColor" -> if (mBound) {
                 val text = call.arguments as String
-                mOverlayService?.updateTitle(text)
+                mOverlayService?.updateTitleColor(text)
             } else
                 throw Exception("BubbleService not running.")
             "updateBubbleBottomText" -> if (mBound) {
